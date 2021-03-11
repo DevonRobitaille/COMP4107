@@ -67,18 +67,7 @@ def compileModel(learning_rate, num_hidden_layers, num_neurons):
 
     return model_GDO, model_MO, model_RMSProp
 
-def fitModel(model, train_size, test_size, batch_size, epochs):
-    # Creating training data
-    x_train = np.random.uniform(-1, 1, [train_size, 2])
-    x_test  = np.random.uniform(-1, 1, [test_size, 2])
-
-    y_train = np.zeros((train_size, 1))
-    for index in range(train_size):
-        y_train[index] = loss(x_train[index, 0], x_train[index, 1])
-    y_test  = np.zeros((test_size, 1))
-    for index in range(test_size):
-        y_test[index] = loss(x_test[index, 0], x_test[index, 1])
-
+def fitModel(model, x_train, y_train, x_test, y_test, batch_size, epochs):
     timetaken = TimeHistory()
     history = model.fit(
         x_train,

@@ -34,9 +34,11 @@ def compileModel(learning_rate, num_hidden_layers, num_neurons):
 
     model = keras.Model(inputs=inputs, outputs=outputs)
 
+    RMSProp_Opt = tf.compat.v1.train.RMSPropOptimizer( learning_rate, decay=0.9, momentum=0.0, epsilon=1e-10, use_locking=False, centered=False, name='RMSProp' )
+
     # Specify training configuration (optimizer, loss, metrics)
     model.compile(
-        optimizer = keras.optimizers.SGD( learning_rate ),
+        optimizer = RMSProp_Opt,
         loss = "mse",
         metrics = ["mae", "acc"]
     )
@@ -55,7 +57,7 @@ def compileModel(learning_rate, num_hidden_layers, num_neurons):
 #   epochs = int
 # Outputs:
 #   model = model
-def fitModel(model, x_train, y_train, x_test, y_test, batch_size, epochs):
+def fitModel(model, x_train, y_train, x_test, y_test, batch_size, epochs, set_Early_Stopping):
     trainingStopCallback = haltCallback()
     history = model.fit(
         x_train,
@@ -66,11 +68,11 @@ def fitModel(model, x_train, y_train, x_test, y_test, batch_size, epochs):
         # monitoring validation loss and metrics
         # at the end of each epoch
         validation_split = 0.2,
-        callbacks=[trainingStopCallback]
+        callbacks= [trainingStopCallback] if (set_Early_Stopping) else []
     )
 
     # Evaluate the model on the test data
     results = model.evaluate(x_test, y_test, batch_size)
 
     # return the history of trying to fit the data to the model
-    return results, model, len(history.history['loss'])
+    return results, model, history.history['loss']
