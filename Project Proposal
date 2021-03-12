@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\title{COMP 4107 - Project Proposal}
+\author{
+Devon *LName*
+\texttt{- *SNumber*}
+\and
+Alex *LName*
+\texttt{- *SNumber*}
+\and
+Graham Shannon
+\texttt{- 100970902}
+}
+\begin{document}
+\maketitle
+\newpage
+
+
+
+\section*{*Need to streamline research question* Do Neural Networks have the ability to detect the genre of music from the notes of a songs chorus?}
+
+	\begin{itemize}
+
+		\item{What data-set will we be used in this research?}
+		
+		\begin{itemize}
+		
+			\item Luckily for us, there is a vast supply of free to scrape MIDI files online, sources such as: https://freemidi.org/, https://bitmidi.com/, https://www.midiworld.com/files/ to name a few.
+			\item The MIDI file archetype does not contain real audio, and instead is scores of notes which will allow us to use much more, and be more efficient with the research than combing through full audio files- it will also allow our input vectors to be more easily setup, and digested.
+			\item From here we will be able to work with these notes to properly train our neural network while retaining a reasonable size of data to be used instead of combing through audio files to train it to recognize how the scores of notes are based in certain genres.
+			
+		\end{itemize}
+		
+		\item{What techniques do we intend to use?}
+		
+		\begin{itemize}
+		
+		    \item
+		    \item
+		    \item
+	    
+	    \end{itemize}
+	    
+	    \item{What additional research will need to be done?}
+	    
+	    \begin{itemize}
+
+		    \item
+		    \item
+		    \item
+		 
+	    \end{itemize}
+
+		
+	\end{itemize}
+
+\end{document}
