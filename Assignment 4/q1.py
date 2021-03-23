@@ -59,16 +59,14 @@ mnist = MNIST()
 
 # Test accuracy for different amount of training elements
 accuracy = []
-num_of_test = 500
-for num_of_train in range (1, 100):
+num_of_test = 50
+for num_of_train in range (1, 50):
     result = RunSimulation(mnist, num_of_train, num_of_test)
     accuracy.append( result )
 
 # Plot the data (Accuracy vs num of tests)
-x = np.arange(1, 100, 1)
+x = np.arange(1, len(accuracy)+1, 1)
 y = accuracy
-
-print(y)
 
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
