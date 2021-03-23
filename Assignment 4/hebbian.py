@@ -3,7 +3,6 @@ from random import randint
 
 class HopfieldNetwork():
     def __init__(self, training_set: np.array, bias: int):
-        print("CREATING - Hopfield Network")
         self.bias = bias
         self.neurons = training_set.shape[1]
         self.p = training_set.shape[0]
@@ -16,8 +15,6 @@ class HopfieldNetwork():
 
         # W = W - P.I
         self.W = np.subtract(self.W, (self.p * self.I))
-        print(self.W)
-        print("CREATED - Hopfield Network")
 
     def learn(self, x: np.array):
         index: int = randint(0, self.p)
