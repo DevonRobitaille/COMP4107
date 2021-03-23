@@ -45,4 +45,4 @@ class MNIST:
         t_5[t_5 <= 127] = -1
         t_5[t_5 > 127] = 1
 
-        return np.concatenate((t_1[:num_of_test], t_5[:num_of_test]), axis=0), len(t_1)
+        return np.concatenate((t_1[:num_of_test], t_5[:num_of_test]), axis=0), len(t_1[:num_of_test])

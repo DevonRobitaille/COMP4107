@@ -13,11 +13,12 @@ def RunSimulation(mnist, num_of_train: int, num_of_test: int):
     testing_set, num_of_testing_1 = mnist.loadTestingSet(num_of_test)
 
     # accuracy
-    correct = 0
-    total = 0
+    correct_label_1 = 0
+    correct_label_5 = 0
+    total_label_1 = 0
+    total_label_5 = 0
     
     for i in range (len(testing_set)):
-        total = total + 1
         sum = -1
         
         # find energy minima
@@ -34,34 +35,37 @@ def RunSimulation(mnist, num_of_train: int, num_of_test: int):
             # calculate all the distances using np.linalg.norm(target - candidate)
             dist_norms[j] = np.linalg.norm(training_set[j] - testing_set[i])
 
-        # find the mind distance
+        # find the min distance
         min_index = np.argmin(dist_norms)
 
         # see if the labels match
-        if min_index < num_of_train:
-            # Min value was a 1
-            if i < num_of_testing_1:
-                correct = correct + 1
+        if i < num_of_testing_1:
+            total_label_1 = total_label_1 + 1
+            if (min_index < num_of_train):
+                correct_label_1 = correct_label_1 + 1
         else:
             # Min value was a 5
-            if i >= num_of_testing_1:
-                correct = correct + 1
+            total_label_5 = total_label_5 + 1
+            if (min_index >= num_of_train):
+                correct_label_5 = correct_label_5 + 1
 
-    accuracy: float = (correct/total)
+    # print("   1 - Correct: %d, Total: %d" % (correct_label_1, total_label_1))
+    # print("   5 - Correct: %d, Total: %d" % (correct_label_5, total_label_5))
+    accuracy: float = ((correct_label_1 + correct_label_5)/(total_label_1 + total_label_5))
     return accuracy
 
 # Store the mnist data is memory
 mnist = MNIST()
 
 # Test accuracy for different amount of training elements
-# print(RunSimulation(mnist, 50, 500))
 accuracy = []
-num_of_test = 1000
-for num_of_train in range (1, 50):
-    accuracy.append( RunSimulation(mnist, num_of_train, num_of_test) )
+num_of_test = 500
+for num_of_train in range (1, 100):
+    result = RunSimulation(mnist, num_of_train, num_of_test)
+    accuracy.append( result )
 
 # Plot the data (Accuracy vs num of tests)
-x = np.arange(1, 50, 1)
+x = np.arange(1, 100, 1)
 y = accuracy
 
 print(y)
