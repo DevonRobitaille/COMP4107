@@ -49,8 +49,6 @@ def RunSimulation(mnist, num_of_train: int, num_of_test: int):
             if (min_index >= num_of_train):
                 correct_label_5 = correct_label_5 + 1
 
-    # print("   1 - Correct: %d, Total: %d" % (correct_label_1, total_label_1))
-    # print("   5 - Correct: %d, Total: %d" % (correct_label_5, total_label_5))
     accuracy: float = ((correct_label_1 + correct_label_5)/(total_label_1 + total_label_5))
     return accuracy
 
@@ -59,7 +57,7 @@ mnist = MNIST()
 
 # Test accuracy for different amount of training elements
 accuracy = []
-num_of_test = 50
+num_of_test = 250
 for num_of_train in range (1, 50):
     result = RunSimulation(mnist, num_of_train, num_of_test)
     accuracy.append( result )

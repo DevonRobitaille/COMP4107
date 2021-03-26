@@ -16,6 +16,7 @@ class HopfieldNetwork():
         # W = W - P.I
         self.W = np.subtract(self.W, (self.p * self.I))
 
+    # This is the update function to point the column vector towards a similar looking element from the hopfield network
     def learn(self, x: np.array):
         index: int = randint(0, self.p)
 

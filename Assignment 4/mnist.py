@@ -5,6 +5,7 @@ class MNIST:
     def __init__(self):
         print("LOADING - MNIST dataset")
 
+        # Load data from MNIST data set
         self.data_path = "mnist/" 
         self.dataForTraining = np.loadtxt(self.data_path + "mnist_train.csv", delimiter=",", dtype=int)
         self.dataForTesting = dataForTesting = np.loadtxt(self.data_path + "mnist_test.csv",  delimiter=",", dtype=int)
@@ -26,22 +27,34 @@ class MNIST:
         print("LOADED  - MNIST dataset")
 
     def loadTrainingSet(self, num_of_train: int):
+        # Create a deep copy of the training data
         t_1 = np.copy(self.training_1)
+
+        # Polarize the data to either -1 or 1
         t_1[t_1 <= 127] = -1
         t_1[t_1 > 127] = 1
 
+        # Create a deep copy of the training data
         t_5 = np.copy(self.training_5)
+
+        # Polarize the data to either -1 or 1
         t_5[t_5 <= 127] = -1
         t_5[t_5 > 127] = 1
 
         return np.concatenate((t_1[:num_of_train], t_5[:num_of_train]), axis=0)
 
     def loadTestingSet(self, num_of_test: int):
+        # Create a deep copy of the testing data
         t_1 = np.copy(self.testing_1)
+
+        # Polarize the data to either -1 or 1
         t_1[t_1 <= 127] = -1
         t_1[t_1 > 127] = 1
 
+        # Create a deep copy of the testing data
         t_5 = np.copy(self.testing_5)
+
+        # Polarize the data to either -1 or 1
         t_5[t_5 <= 127] = -1
         t_5[t_5 > 127] = 1
 
