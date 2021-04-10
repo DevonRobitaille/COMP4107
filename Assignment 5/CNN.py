@@ -104,7 +104,7 @@ class CNN:
                 best_9_maps = np.concatenate((best_9_maps, dist_from_norm), axis=None)
                 best_9_maps = np.sort(best_9_maps, axis=None, order='dist')[:num_patches]
     
-        return best_9_maps
+        return best_9_maps, feature_maps
 
     def _rgb2gray(self, rgb):
         return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])

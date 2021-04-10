@@ -1,6 +1,7 @@
 from CNN import CNN
 import tensorflow as tf
 import matplotlib.pyplot as plt
+from math import floor
 
 cnn = CNN()
 
@@ -32,5 +33,33 @@ plt.legend(loc='lower right')
 plt.show()
 
 # Q4
-results = cnn.getFeatureMap(9)
+labels = [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+]
 
+best_9_maps, f_maps = cnn.getFeatureMap(9)
+plt.figure()
+f, axarr = plt.subplots(6, 3)
+for i in range (9):
+    t_img = cnn.test_images[ best_9_maps[i][1] ]
+    t_img_gray = cnn._rgb2gray(t_img)
+    
+    # Original Image
+    axarr[floor(i/3)*2, (i%3)].imshow(t_img_gray)
+    axarr[floor(i/3)*2, (i%3)].set_title('Original ' + labels[cnn.test_labels[ best_9_maps[i][1] ][0]])
+    
+    # Feature Map
+    axarr[floor(i/3)*2+1, (i%3)].imshow(f_maps[best_9_maps[i][1], :, :, best_9_maps[i][2]])
+    axarr[floor(i/3)*2+1, (i%3)].set_title('Feature Map ' + labels[cnn.test_labels[ best_9_maps[i][1] ][0]])
+
+f.subplots_adjust(hspace=2, wspace=1)
+plt.show()
