@@ -31,6 +31,6 @@ plt.ylim([0.5, 1])
 plt.legend(loc='lower right')
 plt.show()
 
-# Q4?????
-# Show the top 9 patches (regions that best activate neurons)
-# https://www.tensorflow.org/api_docs/python/tf/image/extract_patches
+# Q4
+results = cnn.getFeatureMap(9)
+
