@@ -23,7 +23,7 @@ class LSTM_NN:
         self.genres = []
 
         # Build training set and testing set
-        for genre in range(len(training_case_genre_folders)):
+        for genre in range(len(training_case_genre_folders)): # Written By Devon
             # Create the different possible outputs
             self.genres.append(training_case_genre_folders[genre])
 
@@ -79,7 +79,7 @@ class LSTM_NN:
         # labels = labels[:700]
 
 
-    def createModel(self):
+    def createModel(self): # Written By Graham
         # Set as sequential due to LSTM
         model = keras.Sequential()
 
@@ -105,27 +105,40 @@ class LSTM_NN:
 
         return model
 
-    def fitModel(self, model):
+    def fitModel(self, model, epochs:int=5): # Written By Alex
         fitAccuracy = []
-        testAccuracy = []
-        for i in range(30):
+        testAccuracyAvg = []
+        testAccuracyIndividual = np.empty((epochs, 10), dtype=np.float32)
+        for i in range(epochs):
             historyFit = model.fit(self.training_x, self.training_y, batch_size=32) # validation_data=(validation_x, validation_y)
             fitAccuracy.append(historyFit.history['accuracy'])
-            historyTest = model.evaluate(self.testing_x, self.testing_y)
-            # for j in range(10):
-            #     model.evaluate(testing_x[0+(20*i):20+(20*i)], testing_y[0+(20*i):20+(20*i)])
-            testAccuracy.append(historyTest[1])
+            historyTestAvg = model.evaluate(self.testing_x, self.testing_y) # average peformance
+            for j in range(10):
+                testAccuracyIndividual[i, j] = model.evaluate(self.testing_x[20*j:20*(j+1)], self.testing_y[20*j:20*(j+1)])[1]
+            testAccuracyAvg.append(historyTestAvg[1])
 
-        return fitAccuracy, testAccuracy
+        return fitAccuracy, testAccuracyAvg, testAccuracyIndividual
 
     def evaluateModel(self, model):
         return test_acc
 
-    def graphData(self, fitAccuracy, testAccuracy):
+    def graphData(self, fitAccuracy, testAccuracyAvg, testAccuracyIndividual): # Written By Alex
         # create accuracy sublpot
         plt.plot(fitAccuracy, label="train accuracy")
-        plt.plot(testAccuracy, label="test accuracy")
+        plt.plot(testAccuracyAvg, label="test accuracy")
         plt.ylabel("Accuracy")
+        plt.xlabel("Epochs")
+        plt.legend(loc="lower right")
+        plt.title("Accuracy eval")
+
+        # Show the plot
+        plt.show()
+
+        for i in range (testAccuracyIndividual.shape[1]):
+            plt.plot(testAccuracyIndividual[:, i], label=self.genres[i])
+
+        plt.ylabel("Accuracy")
+        plt.xlabel("Epochs")
         plt.legend(loc="lower right")
         plt.title("Accuracy eval")
 

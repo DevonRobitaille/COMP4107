@@ -11,7 +11,6 @@ if __name__ == "__main__":
     print(lstm.training_x.shape)
     print(lstm.testing_y.shape)
     print(lstm.testing_x.shape)
-
     # Step 2 - Build the model
     model = lstm.createModel()
     model.summary()
@@ -21,9 +20,9 @@ if __name__ == "__main__":
     model.summary()
 
     # Step 4 - Fit the model
-    fitAccuracy, testAccuracy = lstm.fitModel(model)
+    fitAccuracy, testAccuracyAvg, testAccuracyIndividual = lstm.fitModel(model, 30)
 
     # Step 5 - Predict using the model
 
     # Step 6 - Graph different data points
-    lstm.graphData(fitAccuracy, testAccuracy)
+    lstm.graphData(fitAccuracy, testAccuracyAvg, testAccuracyIndividual)
