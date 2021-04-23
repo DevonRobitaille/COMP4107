@@ -1,4 +1,4 @@
-To launch the program, you must first visit thesrcdirectory, which can befound using the file directory schema listed earlier. Once you have a commandprompt or terminal window open run themain.pyfile using the following argu-ments:
+To launch the program, you must first visit thesrcdirectory, which can befound using the file directory schema listed earlier. Once you have a command prompt or terminal window open run themain.pyfile using the following argu-ments:
 
 $: python main.py <path to model, i.e. .\saved_model, (optional)>
 
